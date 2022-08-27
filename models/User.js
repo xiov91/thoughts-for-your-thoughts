@@ -3,7 +3,7 @@
 // that retrieves the length of the user's
 // friends array field on query.
 
-const { Schema, model } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 
 const UserSchema = new Schema(
     {
@@ -19,9 +19,15 @@ const UserSchema = new Schema(
             unique: true,
             // needs email validation still
         },
-        thoughts: [],
-        friends: []
-    },
+        thoughts: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Thoughts'
+        }],
+        friends: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Users'
+        }]
+        },
     {
         toJSON: {
             virtuals: true,
