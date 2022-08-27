@@ -1,18 +1,23 @@
 {
-    "name": "thoughts-for-your-thoughts",
-    "version": "1.0.0",
-    "private": true,
-    "description": "",
-    "main": "server.js",
-    "scripts": {
-      "start": "node server.js"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-      "express": "^4.17.1",
-      "mongoose": "^6.5.2"
-    }
+  "name": "thoughts-for-your-thoughts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiov91/thoughts-for-your-thoughts.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xiov91/thoughts-for-your-thoughts/issues"
+  },
+  "homepage": "https://github.com/xiov91/thoughts-for-your-thoughts#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "mongoose": "^6.5.3"
   }
-  
+}
