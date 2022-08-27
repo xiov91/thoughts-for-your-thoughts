@@ -22,7 +22,7 @@ const userController = {
 
     // get single user and populate friend/thought data
     getUserById({ params }, res) {
-        User.findOne({ _id: params.id })
+        User.findById({ _id: params.id })
             .populate({
                 path: 'thoughts',
                 select: '-__v'
@@ -37,7 +37,7 @@ const userController = {
                     res.status(404).json({ messages: 'New page, who dis? (No user found)' });
                     return;
                 }
-                res.json(dbThoughtData);
+                res.json(dbUserData);
             })
             .catch(err => {
                 console.log(err);
