@@ -19,7 +19,7 @@ const thoughtController = {
 
     //get one thought by id
     getThoughtById({ params }, res) {
-        Thought.findOne({ _id: params.id })
+        Thought.findOne({ _id: params.thoughtId })
             .populate({
                 path: 'reactions',
                 select: '-__v'
@@ -50,7 +50,7 @@ const thoughtController = {
 
     //updateThought
     updateThought({ params, body }, res) {
-        Thought.findOneAndUpdate({ _id: params.id }, body, { new: true, runValidators: true })
+        Thought.findOneAndUpdate({ _id: params.thoughtId }, body, { new: true, runValidators: true })
             .then(dbThoughtData => {
                 if (!dbThoughtData) {
                     res.status(404).json({ message: 'No Thoughts, Head Empty (No ID match!)' });
@@ -63,7 +63,7 @@ const thoughtController = {
 
     //deleteThought
     deleteThought({ params }, res) {
-        Thought.findOneAndDelete({ _id: params.id })
+        Thought.findOneAndDelete({ _id: params.thoughtId })
             .then(dbThoughtData => {
                 if (!dbThoughtData) {
                     res.status(404).json({ message: 'No Thoughts, Head Empty (No ID match!)' });
@@ -76,8 +76,7 @@ const thoughtController = {
 
     // add reaction to thought
     addReaction({ params, body }, res) {
-        console.log(body);
-        Thought.create({ _id: params.thoughtId }, { $push: { reactions: body } }, { new: true, runValidators: true })
+        Thought.findOneAndUpdate({ _id: params.thoughtId }, { $push: { reactions: body } }, { new: true, runValidators: true })
             .populate({
                 path: 'reactions',
                 select: '-__v'
@@ -95,8 +94,7 @@ const thoughtController = {
 
     // remove reaction
     removeReaction({ params }, res) {
-        console.log(body);
-        Thought.findOneAndDelete({ _id: params.thoughtId }, { $pull: { reactions: { reactionsId: params.reactionId } } }, { new: true })
+        Thought.findOneAndUpdate({ _id: params.thoughtId }, { $pull: { reactions: { reactionsId: params.reactionId } } }, { new: true })
             .then(dbThoughtData => {
                 if (!dbThoughtData) {
                     res.status(404).json({ message: 'No Thoughts, Head Empty (No ID match!)' });
